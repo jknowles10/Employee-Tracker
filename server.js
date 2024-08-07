@@ -20,10 +20,27 @@ console.log('Connected to the employeetracker_db database'))
     
 pool.connect();
 
+// Setup prompt for options menu:
+
+const options = [
+    {
+    type: 'list', 
+    name: 'options',
+    message: 'Choose an option:',
+    choices: ['View all departments',
+            'View all roles',
+            'View all employees',
+            'Add a department',
+            'Add a role',
+            'Add an employee',
+            'Update an employee',
+            'Exit'
+    ] 
+}]
 //SET UP QUERIES: 
 
 const {options} = await input();
-switch (menu) {
+switch (options) {
     case 'View all departments':
         await pool.query('SELECT * FROM departments;',
             function (err, {rows}) {
@@ -208,6 +225,7 @@ app.post('/addRole', (req, res) => {
         }
     });
 });
+
 
 
 //Add an employee
